@@ -1,0 +1,48 @@
+.heading {
+  display: inline-block;
+  /* Required for animation */
+  transition: transform 1s ease;
+  /* Smooth transition */
+}
+
+.heading.animate {
+  transform: translateX(100%);
+  /* Move to the right */
+}
+
+/* Optional: Reset the position on load */
+nav {
+  overflow: hidden;
+  /* Prevent overflow while animating */
+}
+
+.cursiv-font {
+  font-family: "Satisfy", cursive;
+  font-weight: 400;
+
+  color: white;
+}
+
+.glow {
+  text-shadow:
+  0 0 5px #00ccff, 0 0 10px #057693, 0 0 15px #5c5c5c, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #006e93, 0 0 50px #87969b ;
+}
+
+.neon {
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.glow img {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 5px #00ccff) drop-shadow(0 0 10px #00ccff) drop-shadow(0 0 15px #00ccff);
+}
