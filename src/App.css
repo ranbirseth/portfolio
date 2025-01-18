@@ -46,3 +46,57 @@ nav {
   transition: all 0.3s ease;
   filter: drop-shadow(0 0 5px #00ccff) drop-shadow(0 0 10px #00ccff) drop-shadow(0 0 15px #00ccff);
 }
+
+
+
+.animated-text {
+
+  font-family: 'Arial', sans-serif;
+  font-size: 1.3rem;
+  color: #fff;
+  text-align: center;
+  animation: rainbow-text 5s infinite;
+  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ffcc00);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 3px;
+}
+
+/* Keyframe for the rainbow effect */
+@keyframes rainbow-text {
+  0% {
+    background-position: 0%;
+  }
+  25% {
+    background-position: 25%;
+  }
+  50% {
+    background-position: 50%;
+  }
+  75% {
+    background-position: 75%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+
+
+.animate-fadeIn {
+  opacity: 1 !important;
+  transform: translateY(0);
+}
+
+/* Optional: Add a transform for smooth transition */
+.project-item {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.animate-fadeIn {
+  opacity: 1 !important;
+  transform: translateY(0);
+}

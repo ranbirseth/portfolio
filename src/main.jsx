@@ -8,9 +8,6 @@ import Footer from './Component/Footer.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Nav />
-    <div className='min-h-full'>
     <App />
-    </div>
-    <Footer />
   </StrictMode>,
 )
