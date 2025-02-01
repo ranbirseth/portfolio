@@ -21,8 +21,8 @@ const ToolSection = () => {
     }, []);
 
     return (
-        <section className=" text-white mt-[15rem]">
-            <h1 className="animated-text text-center text-3xl mb-14">Tools I Use to Develop Websites</h1>
+        <section className=" text-white md:mt-[15rem] mt-[10rem]">
+            <h1 className="animated-text text-center md:text-3xl text-xs mb-14">Tools I Use to Develop Websites</h1>
           
             <div className="flex flex-wrap justify-center gap-10">
                 {/* Add your tools here */}

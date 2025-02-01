@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Social from './Social';
 
 const Contact = () => {
+   
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -34,9 +35,9 @@ const Contact = () => {
 
     return (
         <>
-            <section className='flex justify-around mt-52'>
+            <section className='flex md:flex-row flex-col  justify-around md:mt-52 mt-[3rem]'>
 
-                <div className="  w-1/2 shadow-lg rounded-xl">
+                <div className="  md:w-1/2 shadow-lg rounded-xl p-4">
                     <h2 className="text-3xl font-semibold text-center text-white ">Contact Me</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="">
@@ -48,7 +49,7 @@ const Contact = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent text-white"
+                                className="w-full p-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent text-white"
                             />
                         </div>
 
@@ -61,7 +62,7 @@ const Contact = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent text-white"
+                                className="w-full p-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent text-white"
                             />
                         </div>
 
@@ -74,7 +75,7 @@ const Contact = () => {
                                 onChange={handleChange}
                                 required
                                 rows="5"
-                                className="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent text-white"
+                                className="w-full p-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-transparent text-white"
                             />
                         </div>
                         <button type="submit" class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Submit</button>
@@ -89,12 +90,12 @@ const Contact = () => {
 
                     {formStatus && <p className="mt-6 text-center text-lg text-green-500">{formStatus}</p>}
                 </div>
-                <div className='text-white w-1/3 mt-20 text-xl font-thin'>
+                <div className='text-white md:w-1/3 md:mt-20 -mt-5 md:text-xl md:font-thin text-xs md:p-0 p-10'>
                 Whether you want to discuss a project, ask a question, or just say hello, feel free to drop a message! 
                 Id love to connect and explore how we can collaborate.
                 <Social />
                 </div>
-               
+              
             </section>
         </>
     );

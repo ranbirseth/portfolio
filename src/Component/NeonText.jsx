@@ -25,14 +25,14 @@ function NeonText() {
         <>
 
             <div>
-                <h2 className={`cursiv-font mt-20 text-2xl md:text-4xl text-center transition duration-300 ${isGlowing ? 'glow neon' : ''}`}>
-                    {"< MERN STACK DEVELOPER />"}
+                <h2 className={`cursiv-font md:mt-20 mt-16 text-2xl md:text-4xl text-center transition duration-300 ${isGlowing ? 'glow neon' : ''}`}>
+                    {"< MERN STACK DEVELOPER />"} 
                 </h2>
             </div>
-            <div className={`flex justify-center gap-8 mt-8 md:mt-12 ${isGlowing ? 'glow' : ''}`}>
+            <div className={`flex justify-center md:gap-8 gap-4 mt-6 md:mt-12 ${isGlowing ? 'glow' : ''}`}>
       {/* MongoDB Logo */}
       <img
-        src="https://cdn.icon-icons.com/icons2/2415/PNG/512/mongodb_original_logo_icon_146424.png" 
+        src="https://www.pngrepo.com/png/331488/512/mongodb.png" 
         alt="MongoDB Logo"
         className="h-5 w-5"
       />
