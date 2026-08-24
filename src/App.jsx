@@ -1,148 +1,60 @@
 import './App.css'
-import { useEffect, useState , useRef } from 'react';
-import NeonText from './Component/NeonText';
-import React from "react";
-import Skils from './Component/Skils';
-import Project from './Component/Project';
-import ToolSection from './Component/Tool';
-import Hobby from './Component/Hobby';
-import About from './Component/About';
-import Contact from './Component/Contact';
+import { useEffect, useState } from 'react'
+import { ArrowUpRight, Check, Github, Linkedin, Menu, X, Database, LayoutDashboard, Server, Workflow } from 'lucide-react'
 
-
-
-
-const Tools = [{ title: 'PfpFinder', description: 'Find the best profile pictures and banners for all your social media accounts.', technologies: 'HTML, CSS, BS, JS, NodeJS', image: 'path_to_pfp_image', }, { title: 'BikeKart', description: 'BikeKart is just another bike store web template with multiple sections.', technologies: 'HTML, CSS', image: 'path_to_bike_image', }, { title: 'SimplCalc', description: 'Tired of calculating manually? SimplCalc is best and faster solution.', technologies: 'HTML, CSS, JS', image: 'path_to_calc_image', },];
-
-const projects = [{ title: 'Real time chat app', description: 'This application showcases the power of real-time communication paired with modern web development technologies, offering a robust, user-friendly platform for online chatting.', technologies: 'MERN stack (MongoDB, Express, React, Node.js) along with Socket.io', image: 'https://tse4.mm.bing.net/th?id=OIG4.psU9aAw0IiT6y06CynLI&pid=ImgGn', link: 'https://plugme.netlify.app/' }, { title: 'Contact manager', description: 'This contact manager simplifies contact organization, providing a smooth and reliable experience for users looking to stay on top of their personal or professional connections.', technologies: 'MongoDB, Express, React, Node.js', image: 'https://tse2.mm.bing.net/th?id=OIG2.zS8Ba88.S8L2wAAUbe9o&pid=ImgGn', link: 'https://contactzone.netlify.app/' }, { title: 'Todo List', description: 'This To-Do List application is a simple, yet powerful tool to help you manage your daily tasks, stay on track, and improve productivity . for geting your gole', technologies: 'MongoDB, Express, React, Node.js', image: 'https://tse2.mm.bing.net/th?id=OIG2.DwWfmgVSnbjM0yVu9ZK4&pid=ImgGn', link: 'https://taskdoner.netlify.app/' },];
+const links = { github: 'https://github.com/ranbirseth', linkedin: 'https://www.linkedin.com/in/ranbir-seth-02a0471b3/', email: 'mailto:ranbirseth001@gmail.com' }
+const projects = [
+  { number: '01', title: 'GYMZA', category: 'SaaS / Operations', description: 'A gym management platform for members, trainers, subscriptions and attendance, with role-based portals and real-time updates.', tags: ['React', 'Node.js', 'MongoDB', 'Socket.IO'], repo: 'https://github.com/ranbirseth/gymza', tone: 'project-lime', visual: 'MEMBER\nCONTROL' },
+  { number: '02', title: 'ATR Restaurant', category: 'POS / Hospitality', description: 'An end-to-end restaurant system connecting customer ordering, kitchen operations, billing and analytics in real time.', tags: ['MERN', 'Socket.IO', 'jsPDF', 'Printers'], repo: 'https://github.com/ranbirseth/Atr_Resturant', tone: 'project-coral', visual: 'ORDER\nFLOW' },
+  { number: '03', title: 'LPG Distribution', category: 'Logistics / Workflow', description: 'A booking and delivery platform with stock management, status updates, receipts and role-based dashboards.', tags: ['React', 'Express', 'MongoDB', 'Multer'], repo: 'https://github.com/ranbirseth/lpg-distribution-system', tone: 'project-blue', visual: 'DELIVERY\nDESK' },
+]
+const services = [
+  ['01', LayoutDashboard, 'Business websites', 'Focused, responsive websites that give a business a clear digital home.'],
+  ['02', Server, 'Full-stack applications', 'Complete products across interface, API, authentication and database.'],
+  ['03', Database, 'Admin dashboards', 'Operational tools for orders, members, payments, analytics and teams.'],
+  ['04', Workflow, 'Business automation', 'POS, booking, billing and workflow systems shaped around real operations.'],
+]
+const stack = ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'Tailwind CSS', 'Socket.IO']
 
 function App() {
-
-
-  const [displayedText, setDisplayedText] = useState('');
-  const fullText = `Heyy there are i am  Ranbir and i am a IT student, i am a passionat Web Devloper and Softwear Engineer and i love to learn New technologies  `;
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [formState, setFormState] = useState('idle')
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
 
 
   useEffect(() => {
-    let index = 0;
-
-    const typingEffect = setInterval(() => {
-      if (index < fullText.length) {
-        setDisplayedText((prev) => prev + fullText[index]);
-        index++;
-      } else {
-        clearInterval(typingEffect);
-      }
-    }, 50); // Adjust typing speed here
-
-    return () => clearInterval(typingEffect);
+    document.title = 'Ranbir Seth | Full-Stack Developer'
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fadeIn'); // Add animation class when in view
-        } else {
-          entry.target.classList.remove('animate-fadeIn');
-        }
-      });
-    });
+  const submitForm = (event) => {
+    event.preventDefault()
+    const subject = encodeURIComponent(`Project enquiry from ${form.name}`)
+    const body = encodeURIComponent(`${form.message}\n\nReply to: ${form.email}`)
+    window.location.href = `${links.email}?subject=${subject}&body=${body}`
+    setFormState('ready')
+  }
 
-    const elements = document.querySelectorAll('.project-item');
-    elements.forEach((el) => observer.observe(el));
+  return <div className="site-shell">
+    <header className="site-nav">
+      <a className="brand" href="#top" aria-label="Ranbir Seth home"><span>R</span><strong>Ranbir Seth</strong></a>
+      <nav className={menuOpen ? 'nav-links is-open' : 'nav-links'} aria-label="Primary navigation">
+        {['about', 'services', 'work', 'contact'].map((item) => <a key={item} href={`#${item}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
+        <a className="nav-cta" href={links.email}>Let&apos;s talk <ArrowUpRight size={15} /></a>
+      </nav>
+      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X /> : <Menu />}</button>
+    </header>
 
-    return () => {
-      elements.forEach((el) => observer.unobserve(el)); // Clean up observer on unmount
-    };
-  }, []);
-  return (
-    <>
-
-      <div class="bg-black">
-
-        <section className="md:flex md:items-center  md:justify-between md:p-[5.5rem] ">
-          <div className="flex justify-center  md:mt-0 md:block">
-            <img
-              src="https://scontent.frdp1-1.fna.fbcdn.net/v/t39.30808-1/475345496_1313415529793859_3185035443026836281_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_ohc=8uiJTPpUKI4Q7kNvgEpwtZS&_nc_zt=24&_nc_ht=scontent.frdp1-1.fna&_nc_gid=AC5m_wYTFBOBwTNMNFXXvwC&oh=00_AYBFwlsTkNl_JbIESL3Tpl2nzJuO9VN5b7oY8q4Oke6dhw&oe=67A299D0" // Replace with your image source
-              alt="Ranbir Seth"
-              className="md:w-[16rem] w-40 h-40 md:h-[16rem] rounded-full border-1 shadow-lg md:mt-0 mt-8  glowing-border"
-            />
-          </div>
- 
-          <div className={` md:p-8  md:shadow-lg text-white md:items-center md:text-center -mt-3 md:mt-0 md:block`}>
-            <h2 className="md:text-3xl font-bold mb-8 mt-14 md:mt-0 text-2xl md:ml-0 ml-10 text-purple-600 ">About Me</h2>
-
-            <p className="md:text-lg md:w-[40vw] text-xs w-[90%] p-4 m-5 md:mt-0 -mt-8">
-              <span className='h-[2rem]' >{displayedText}</span>
-            </p>
-          </div>
-        </section>
-
-        <section>
-          <NeonText />
-        </section>
-        <section>
-          <div className="md:mt-36 mt-20 ">
-            <h1 className="animated-text md:text-xl text-xl  ">What i love to do ..</h1>
-          </div>
-
-          <div>
-            <Hobby />
-
-          </div>
-        </section>
-        <section className='md:p-40'>
-          <About />
-        </section>
-
-        <section className='md:p-40 md:-mt-20'>
-          <Skils />
-        </section>
-
-        <section>
-          <div className='md:mt-24'>
-            <ToolSection /></div>
-        </section>
-
-        <section className='Project mt-16 md:mt-36 ml-4 '>
-          <h1 className="text-center text-white text-2xl md:pb-0 pb-[20rem]">Project</h1>
-          <div className="App md:ml-20">
-            <header className="App-header">
-              <div className="flex flex-col justify-center items-center mt-8 ml-12  md:ml-36 md:flex-row gap-10 md:space-x-3 h-[50vh] w-[70vw] md:p-4">
-                {projects.map((project, index) => (
-                  <div key={index} className="project-item opacity-0 transition-opacity duration-700">
-                    <Project
-                      title={project.title}
-                      description={project.description}
-                      technologies={project.technologies}
-                      image={project.image}
-                      link={project.link}
-                    />
-                  </div>
-                ))}
-              </div>
-
-              <div className='flex justify-center md:mt-20 mt-[23rem]'>
-                <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">more</button>
-              </div>
-            </header>
-            {/* <div className='flex  justify-center items-center mt-10  -ml-10'>
-              <button className='box flex items-center justify-center  text-center p-3 text-white rounded-3xl shadow-lg   bg-gradient-to-r from-gray-700 via-indigo-800 to-gray-900 
-         transform transition-all duration-300 ease-in-out 
-        hover:scale-105 hover:rotate-3 hover:shadow-xl hover:bg-gradient-to-l 
-        hover:from-purple-700 hover:via-blue-800 hover:to-gray-600  "'> Explore More </button>
-            </div> */}
-          </div>
-        </section>
-        <section>
-          <Contact />
-        </section>
-
-      </div>
-
-    </>
-  )
+    <main id="top">
+      <section className="hero section-pad"><div className="hero-copy reveal"><div className="eyebrow"><i /> Available for freelance work</div><p className="hero-kicker">Full-stack developer / product builder</p><h1>Digital products<br /><em>with a purpose.</em></h1><p className="hero-intro">Hi, I&apos;m Ranbir Seth. I build modern websites and full-stack business applications that solve real-world problems.</p><div className="hero-actions"><a className="button button-light" href="#work">View my work <ArrowUpRight size={17} /></a><a className="text-link" href={links.email}>Start a conversation <ArrowUpRight size={15} /></a></div></div><div className="hero-art reveal delay-one" aria-label="Abstract product interface visual"><div className="art-orbit orbit-one" /><div className="art-orbit orbit-two" /><div className="art-core"><span>BUILD</span><strong>01</strong><small>FROM IDEA TO INTERFACE</small></div><div className="art-note note-top">01 / product systems</div><div className="art-note note-bottom">React + Node.js + MongoDB</div></div></section>
+      <div className="marquee" aria-hidden="true"><span>PRODUCT THINKING</span><b>+</b><span>FULL-STACK CRAFT</span><b>+</b><span>BUSINESS LOGIC</span><b>+</b><span>PRODUCT THINKING</span></div>
+      <section id="about" className="section-pad split-section reveal"><div><p className="section-label">01 / About</p><h2>Code is the medium.<br /><em>Clarity is the goal.</em></h2></div><div className="section-copy"><p>I work across frontend, backend and database layers to turn messy business requirements into calm, usable products.</p><p>From a member portal to a restaurant kitchen workflow, I care about the details that make software feel dependable in the hands of real people.</p><div className="capability-grid">{[['Frontend', 'React / Next.js'], ['Backend', 'Node / Express'], ['Data', 'MongoDB / MySQL'], ['Systems', 'Auth / APIs']].map(([title, detail]) => <div key={title}><span>{title}</span><small>{detail}</small></div>)}</div></div></section>
+      <section id="services" className="section-pad services-section"><div className="section-heading reveal"><div><p className="section-label">02 / Capabilities</p><h2>What I build</h2></div><p>Useful software for the work happening behind the scenes.</p></div><div className="service-grid">{services.map(([number, Icon, title, description]) => <article className="service-card reveal" key={title}><span className="card-number">{number}</span><Icon size={25} strokeWidth={1.4} /><h3>{title}</h3><p>{description}</p><ArrowUpRight className="card-arrow" size={18} /></article>)}</div></section>
+      <section id="work" className="section-pad work-section"><div className="section-heading reveal"><div><p className="section-label">03 / Selected work</p><h2>Built for the real world.</h2></div><a className="text-link" href={links.github}>More on GitHub <ArrowUpRight size={15} /></a></div><div className="project-list">{projects.map((project) => <article className={`project-card ${project.tone} reveal`} key={project.title}><div className="project-visual"><span className="project-index">{project.number}</span><div className="visual-grid"><span>{project.visual.split('\n')[0]}</span><strong>{project.visual.split('\n')[1]}</strong></div><div className="visual-footer">SYSTEM / 2024-26</div></div><div className="project-info"><div><p className="project-category">{project.category}</p><h3>{project.title}</h3></div><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a className="project-link" href={project.repo} target="_blank" rel="noreferrer">View repository <ArrowUpRight size={16} /></a></div></article>)}</div></section>
+      <section className="section-pad stack-section reveal"><div><p className="section-label">04 / Toolkit</p><h2>A considered<br /><em>stack.</em></h2></div><div className="stack-cloud">{stack.map((item, index) => <span className={index === 0 ? 'stack-pill primary-pill' : 'stack-pill'} key={item}>{item}</span>)}</div></section>
+      <section id="contact" className="section-pad contact-section"><div className="contact-intro reveal"><p className="section-label">05 / Contact</p><h2>Have a project<br /><em>in mind?</em></h2><p>Tell me what you are trying to make better. I will get back to you at <a href={links.email}>ranbirseth001@gmail.com</a>.</p><div className="social-row"><a href={links.github} target="_blank" rel="noreferrer"><Github size={18} /> GitHub</a><a href={links.linkedin} target="_blank" rel="noreferrer"><Linkedin size={18} /> LinkedIn</a></div></div><form className="contact-form glass-panel reveal delay-one" onSubmit={submitForm}><label>Name<input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} /></label><label>Email<input required type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} /></label><label>What are you building?<textarea required rows="4" value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} /></label><button className="button button-light" type="submit">Open email draft <ArrowUpRight size={17} /></button>{formState === 'ready' && <p className="form-note"><Check size={15} /> Your email client should open with the message ready to send.</p>}</form></section>
+    </main>
+    <footer className="site-footer"><a className="brand" href="#top"><span>R</span><strong>Ranbir Seth</strong></a><p>Full-stack developer building useful things.</p><small>© {new Date().getFullYear()} Ranbir Seth</small></footer>
+  </div>
 }
 
 export default App
